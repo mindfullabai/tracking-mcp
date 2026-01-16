@@ -1,8 +1,10 @@
 # Tracking MCP
 
-![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-orange.svg)
+[![PyPI version](https://img.shields.io/pypi/v/tracking-mcp.svg)](https://pypi.org/project/tracking-mcp/)
+[![Python Version](https://img.shields.io/pypi/pyversions/tracking-mcp.svg)](https://pypi.org/project/tracking-mcp/)
+[![License](https://img.shields.io/github/license/mindfullabai/tracking-mcp.svg)](https://github.com/mindfullabai/tracking-mcp/blob/main/LICENSE)
+[![Downloads](https://img.shields.io/pypi/dm/tracking-mcp.svg)](https://pypi.org/project/tracking-mcp/)
+[![GitHub stars](https://img.shields.io/github/stars/mindfullabai/tracking-mcp.svg)](https://github.com/mindfullabai/tracking-mcp/stargazers)
 
 **Generic MCP server for tracking any entity type with schema-less JSON Hybrid storage.**
 

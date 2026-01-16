@@ -639,7 +639,7 @@ async def get_prompt(name: str, arguments: dict[str, str] | None = None) -> GetP
 # MAIN
 # ============================================================================
 
-async def main():
+async def async_main():
     """Run MCP server."""
     from mcp.server.stdio import stdio_server
 
@@ -651,6 +651,11 @@ async def main():
         )
 
 
-if __name__ == "__main__":
+def main():
+    """Entry point for the MCP server."""
     import anyio
-    anyio.run(main)
+    anyio.run(async_main)
+
+
+if __name__ == "__main__":
+    main()

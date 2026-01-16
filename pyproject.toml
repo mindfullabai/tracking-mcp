@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_backend"
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "tracking-mcp"
-version = "0.1.0"
+version = "1.0.0"
 description = "MCP server for generic entity tracking with JSON Hybrid storage"
 authors = [
     {name = "Mario Mosca"}
@@ -28,11 +28,10 @@ dev = [
 ]
 
 [project.scripts]
-tracking-mcp = "tracking_mcp.server:main"
+tracking-mcp = "tracking_mcp.tracking_server:main"
 
 [tool.setuptools]
 packages = ["tracking_mcp"]
-package-dir = {"" = "mcp_server"}
 
 [tool.black]
 line-length = 100

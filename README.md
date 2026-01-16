@@ -23,39 +23,55 @@ Track body weight, daily scorecards, fitness sessions, books, or any custom enti
 
 ## Installation
 
-### From PyPI (when published)
+### Using uvx (Recommended)
 
 ```bash
+# Run directly without installation
+uvx tracking-mcp
+
+# Or install globally
 pip install tracking-mcp
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/mariomosca/tracking-mcp.git
+git clone https://github.com/mindfullabai/tracking-mcp.git
 cd tracking-mcp
 pip install -e .
 ```
 
 ### Initialize Database
 
-```bash
-# Database will be auto-created in data/tracking.db
-# Or manually initialize:
-cd data
-sqlite3 tracking.db < schema.sql
-```
+Database is auto-created on first use at the path specified in `DB_PATH` environment variable (defaults to `~/tracking.db`).
 
 ## Quick Start
 
 ### Claude Desktop Configuration
 
-Add to your Claude Desktop MCP settings (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+Add to your Claude Desktop MCP settings (`.mcp.json` or `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
 
 ```json
 {
   "mcpServers": {
-    "tracking": {
+    "tracking-mcp": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["tracking-mcp"],
+      "env": {
+        "DB_PATH": "/path/to/your/data/tracking.db"
+      }
+    }
+  }
+}
+```
+
+**Alternative (with pip install)**:
+```json
+{
+  "mcpServers": {
+    "tracking-mcp": {
+      "type": "stdio",
       "command": "tracking-mcp",
       "env": {
         "DB_PATH": "/path/to/your/data/tracking.db"
@@ -354,11 +370,30 @@ ruff check mcp_server/
 pip install -e ".[dev]"
 ```
 
+## Troubleshooting
+
+### RuntimeWarning: coroutine 'main' was never awaited
+
+If you see this error when running the server:
+```
+<coroutine object main at 0x...>
+RuntimeWarning: coroutine 'main' was never awaited
+```
+
+This was fixed in version 1.0.1. Update to the latest version:
+```bash
+pip install --upgrade tracking-mcp
+# or with uvx
+uvx --refresh tracking-mcp
+```
+
+**Root cause**: Python CLI entry points from setuptools expect synchronous `main()` functions. Version 1.0.1+ includes a sync wrapper that properly handles the async MCP server.
+
 ## Version History
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 
-**Current version**: 1.0.0 (Initial public release)
+**Current version**: 1.0.1 (Async entry point fix)
 
 ## Related Projects
 
